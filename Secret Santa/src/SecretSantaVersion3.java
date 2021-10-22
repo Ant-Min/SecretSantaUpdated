@@ -57,7 +57,6 @@ public class SecretSantaVersion3{
       
       //For the code below, it assigns every player a number and then prints the number of the person they're giving to.
       //I did it this way so whomever is hosting does not immediately see their name attached to their Secret Santa.
-      
       int giftees[] = new int[names.size()];
       
       Random randGen = new Random();
@@ -74,7 +73,6 @@ public class SecretSantaVersion3{
       }
       
       //This portion of code assigns players a second number representing the person they are giving to
-      
       int givers[] = new int[names.size()];
       for(int i=0; i<names.size();i++){
           int whomst = randGen.nextInt(names.size())+1;
@@ -91,8 +89,9 @@ public class SecretSantaVersion3{
           }
       }
       
-      System.out.println("Making files for results");
-      
+      System.out.println("Making files for results...");
+          
+      //try-catch block to print results in two different text files; one for assigning numbers, and the other for the gift assignments 
       try {
 		  PrintWriter numbers = new PrintWriter(new FileOutputStream("Secret Santa Assigned Numbers (1st File).txt"));
 		  PrintWriter assigned = new PrintWriter(new FileOutputStream("Secret Santa Giving To (2nd File).txt"));
@@ -115,13 +114,13 @@ public class SecretSantaVersion3{
 	      assigned.close();
 	  }
 	  catch(FileNotFoundException e){
-		  System.out.println("Cannot make file");
+		  System.out.println("Cannot make file.");
 		  System.exit(0);
 	  }
       
   }
 	
-	
+	//players is the method that prints out the current roster prior to number assignments
 	public static void players() {
 		if(names.size()==0) {
 			System.out.println("There are no players yet.");
@@ -136,7 +135,7 @@ public class SecretSantaVersion3{
 		}
 	}
 	
-	
+	//remove is a method that searches the ArrayList names for a player that the user wants to remove from the roster
 	public static void remove(){
 		if(names.size() == 0){
 			System.out.println("You need to have some players first!");
@@ -167,14 +166,14 @@ public class SecretSantaVersion3{
 	            System.out.println("Player not found");
 	        }
 	        
-	        capital();
+	        capital(); //returns proper casing for names
 	        if(names.size()>0) {
 	        	players();
 	        }
 		}
 	}
 	
-	
+	//insert is a method that adds a player to the names ArrayList to add to the game
 	public static void insert() {
 		if(names.size() == 0) {
 			System.out.println("Player added");
@@ -201,7 +200,8 @@ public class SecretSantaVersion3{
 		capital(); //call to capital method to set names with proper case value
 	}
 	
-	
+	//capital is a method that ensures names follow proper noun rules.
+	//This is used because the program makes all names lower case when the user enters a command/name
 	public static void capital() {
 		for(int i=0; i<names.size(); i++) {
 			for(int j=0; j<names.get(i).length(); j++) {
